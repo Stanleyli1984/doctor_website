@@ -1,0 +1,23 @@
+[django]
+REM python "C:\Users\zhongqil\WinPython-64bit-3.5.1.3\python-3.5.1.amd64\Scripts\django-admin.py" startproject Work_manager
+cd C:\Users\zhongqil\PycharmProjects\test_django\Work_manager
+REM python manage.py startapp TasksManager
+python manage.py runserver 127.0.0.1:8000
+
+
+[git]
+git init
+git remote add origin https://github.com/Stanleyli1984/doctor_website.git
+git push -u origin master
+
+[mongoDB]
+cd C:\Program Files\MongoDB\Server\3.2\bin
+"C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe" --dbpath "C:\Users\zhongqil\PycharmProjects\test_mongoDB"
+
+[backup DB]
+cd C:\Users\zhongqil\PycharmProjects\test_django\Database
+mongodump /o .
+
+[sqlite]
+cd C:\Users\zhongqil\Downloads\splite
+.open C:/Users/zhongqil/PycharmProjects/test_django/Database/sqlite.db

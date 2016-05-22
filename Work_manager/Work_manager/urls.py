@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from TasksManager import views
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^process_name/', 'TasksManager.views.process_name.process'),
-    url (r'^$', 'TasksManager.views.index.page'),
-    url (r'^index$', 'TasksManager.views.index.page') ,
+    url (r'^admin/', admin.site.urls),
+    url (r'^process_name/', views.process_name.process),
+    url (r'^$', views.index.page),
+    url (r'^index$', views.index.page),
 ]

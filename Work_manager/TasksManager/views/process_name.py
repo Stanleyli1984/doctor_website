@@ -1,7 +1,9 @@
-from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
-from .forms import RegistrationForm
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+
+from TasksManager.views.forms import RegistrationForm
+
 
 def process(request):
     print(request)
