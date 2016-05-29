@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'TasksManager.new_doctor_information'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -59,7 +60,8 @@ ROOT_URLCONF = 'Work_manager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../TasksManager/templates/'),],
+        'DIRS': [os.path.join(BASE_DIR, '../TasksManager/templates/'),
+                 os.path.join(BASE_DIR, '../TasksManager/new_doctor_information/templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

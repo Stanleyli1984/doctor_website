@@ -21,3 +21,49 @@ mongodump /o .
 [sqlite]
 cd C:\Users\zhongqil\Downloads\splite
 .open C:/Users/zhongqil/PycharmProjects/test_django/Database/sqlite.db
+
+SQLite version 3.13.0 2016-05-18 10:57:30
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> create table tbl1(one varchar(10), two smallint);
+sqlite> insert into tbl1 values('hello!',10);
+sqlite> insert into tbl1 values('goodbye', 20);
+sqlite> select * from tbl1;
+hello!|10
+goodbye|20
+sqlite>
+sqlite> .open C:/Users/zhongqil/PycharmProjects/test_django/Database/sqlite.db
+sqlite> .save C:/Users/zhongqil/PycharmProjects/test_django/Database/sqlite.db
+Error: database is locked
+sqlite> select * from tbl1;
+Error: no such table: tbl1
+sqlite> create table tbl1(one varchar(10), two smallint);
+sqlite> insert into tbl1 values('goodbye', 20);
+sqlite> insert into tbl1 values('hello!',10);
+sqlite> select * from tbl1;
+goodbye|20
+hello!|10
+sqlite>
+
+[Django: OperationalError No Such Table]
+Need to migrate DB:
+
+manage.py migrate --run-syncdb worked for me – erbdex Feb 3 at 8:40
+
+It looks like there was an issue with my migration.
+
+I ran ./manage.py schemamigration research --auto and found that many of the fields didn't have a default specified.
+
+So, I ran ./manage.py schemamigration research --init followed by ./manage.py migrate research
+
+Rerunning the server from there did the trick!
+
+shareeditflag
+answered Sep 10 '14 at 19:22
+
+Brian
+163313
+5	
+ 		
+manage.py migrate --run-syncdb worked for me – erbdex Feb 3 at 8:40

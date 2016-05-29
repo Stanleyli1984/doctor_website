@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        <th>username</th>
+        <th>first_name</th>
+        <th>last_name</th>
+    </tr>
+    {% for item in query_results %}
+    <tr>
+        <td>{{ item.username }}</td>
+        <td>{{ item.first_name }}</td>
+        <td>{{ item.last_name }}</td>
+    </tr>
+    {% endfor %}
+</table>

@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from TasksManager import views
-
+#from TasksManager import views
+from TasksManager.new_doctor_information import views as new_doctor_view
+from TasksManager.new_doctor_information import process_name as new_doctor_process_name
 
 urlpatterns = [
     url (r'^admin/', admin.site.urls),
-    url (r'^process_name/', views.process_name.process),
-    url (r'^$', views.index.page),
-    url (r'^index$', views.index.page),
+    url (r'^process_name/', new_doctor_process_name.process),
+    url (r'^$', new_doctor_view.add_doctor),
+    url (r'^display$', new_doctor_view.display_doctors),
+    #url (r'^index$', views.index.page),
 ]
