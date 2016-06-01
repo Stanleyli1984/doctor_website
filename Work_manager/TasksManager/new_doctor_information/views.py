@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 # - * - Coding: utf -8 - * -
@@ -11,4 +12,16 @@ def add_doctor (request):
 
 def display_doctors (request):
     query_results = NewRegistrationModel.objects.all()
-    return render(request, 'doctors.html', {'query_results':query_results})
+    paginator = Paginator(query_results, 2)
+
+    page = request.GET.get('page')  # can get from request
+    try:
+        doctors = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        doctors = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        doctors = paginator.page(paginator.num_pages)
+
+    return render(request, 'doctors.html', {'query_results':doctors})
