@@ -18,11 +18,13 @@ from django.contrib import admin
 #from TasksManager import views
 from TasksManager.new_doctor_information import views as new_doctor_view
 from TasksManager.new_doctor_information import process_name as new_doctor_process_name
+from TasksManager.pictures import views as pictures_view
 
 urlpatterns = [
     url (r'^admin/', admin.site.urls),
     url (r'^process_name/', new_doctor_process_name.process),
     url (r'^$', new_doctor_view.add_doctor),
     url (r'^display$', new_doctor_view.display_doctors),
+    url (r'^uploadpics$', pictures_view.upload_pictures),
     #url (r'^index$', views.index.page),
 ]

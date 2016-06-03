@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'TasksManager.new_doctor_information'
+    'TasksManager.new_doctor_information',
+    'TasksManager.pictures'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -54,6 +55,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 ROOT_URLCONF = 'Work_manager.urls'
 
@@ -61,7 +64,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, '../TasksManager/templates/'),
-                 os.path.join(BASE_DIR, '../TasksManager/new_doctor_information/templates/')],
+                 os.path.join(BASE_DIR, '../TasksManager/new_doctor_information/templates/'),
+                 os.path.join(BASE_DIR, '../TasksManager/pictures/templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
