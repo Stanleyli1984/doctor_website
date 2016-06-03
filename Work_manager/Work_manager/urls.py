@@ -13,7 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import patterns, url
 from django.contrib import admin
 #from TasksManager import views
 from TasksManager.new_doctor_information import views as new_doctor_view
@@ -23,8 +24,15 @@ from TasksManager.pictures import views as pictures_view
 urlpatterns = [
     url (r'^admin/', admin.site.urls),
     url (r'^process_name/', new_doctor_process_name.process),
+    url (r'^process_picture/', pictures_view.upload_pictures),
+    url (r'^display_picture/', pictures_view.display_pictures),
     url (r'^$', new_doctor_view.add_doctor),
     url (r'^display$', new_doctor_view.display_doctors),
     url (r'^uploadpics$', pictures_view.upload_pictures),
     #url (r'^index$', views.index.page),
 ]
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+                        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+                            'document_root': settings.MEDIA_ROOT}))

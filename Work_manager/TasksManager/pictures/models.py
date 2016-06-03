@@ -5,13 +5,13 @@ import os
 
 def update_filename(instance, filename):
     path = "upload/path/"
-    format = instance.id + os.path.splitext(filename)[1]
+    format = str(instance.id) + os.path.splitext(filename)[1]
     return os.path.join(path, format)
 
 class PictureModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50)
-    docfile = models.FileField(upload_to=update_filename)
+    docfile = models.ImageField(upload_to=update_filename)
 
     #password2 = forms.CharField(
     #                            label=u'Password (Again)',

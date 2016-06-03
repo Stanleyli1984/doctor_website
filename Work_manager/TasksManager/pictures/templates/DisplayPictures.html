@@ -1,14 +1,16 @@
 <table>
     <tr>
-        <th>username</th>
-        <th>first_name</th>
-        <th>last_name</th>
+        <th>id</th>
+        <th>name</th>
+        <th>url</th>
     </tr>
     {% for item in query_results %}
     <tr>
-        <td>{{ item.username }}</td>
-        <td>{{ item.first_name }}</td>
-        <td>{{ item.last_name }}</td>
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.docfile.url }}</td>
+        <td>{{ item.docfile.name }}</td>
+        <td><img src="{{ MEDIA_URL }}{{ item.docfile.url }}" alt="" /></td>
     </tr>
     {% endfor %}
 </table>

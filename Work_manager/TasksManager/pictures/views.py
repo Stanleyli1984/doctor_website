@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 # - * - Coding: utf -8 - * -
@@ -9,11 +11,15 @@ from .models import PictureForm, PictureModel
 def upload_pictures (request):
     #return HttpResponse ("Hello world new!" )
     if request.method == 'POST':
-        picture = PictureModel(request.POST, request.FILES)
-        picture.save()
+        picture_form = PictureForm(request.POST, request.FILES)
+        if picture_form.is_valid():
+            # Is there any way not to explicitly list every field?
+            newdoc = PictureModel(name=request.POST['name'], docfile=request.FILES['docfile'])
+            newdoc.save()
+            return HttpResponseRedirect('/thanks/')
     else:
-        picture = PictureModel()
-    return render(request, 'UploadPictures.html', {'form': PictureForm})
+        picture_form = PictureForm()
+    return render(request, 'UploadPictures.html', {'form': picture_form})
 
 def display_pictures (request):
     query_results = PictureModel.objects.all()
@@ -21,12 +27,12 @@ def display_pictures (request):
 
     page = request.GET.get('page')  # can get from request
     try:
-        doctors = paginator.page(page)
+        pictures = paginator.page(page)
     except PageNotAnInteger:
         # If page is not an integer, deliver first page.
-        doctors = paginator.page(1)
+        pictures = paginator.page(1)
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
-        doctors = paginator.page(paginator.num_pages)
+        pictures = paginator.page(paginator.num_pages)
 
-    return render(request, 'DisplayPictures.html', {'query_results':doctors})
+    return render(request, 'DisplayPictures.html', {'query_results':pictures})
