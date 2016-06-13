@@ -22,7 +22,6 @@ class PictureModel(models.Model):
         return self.name
 
 
-
 class PictureForm(forms.ModelForm):
     class Meta:
         model = PictureModel

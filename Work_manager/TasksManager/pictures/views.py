@@ -7,7 +7,13 @@ from django.http import HttpResponseRedirect
 # - * - Coding: utf -8 - * -
 #sys.path.insert(0, os.path.abspath('.'))
 # View for index page.
+import os
 from .models import PictureForm, PictureModel
+from celery import Celery
+from django.conf import settings
+
+app = Celery('proj', broker='amqp://zhongqi:working@192.168.0.126/myvhost')
+
 def upload_pictures (request):
     #return HttpResponse ("Hello world new!" )
     if request.method == 'POST':
@@ -16,6 +22,7 @@ def upload_pictures (request):
             # Is there any way not to explicitly list every field?
             newdoc = PictureModel(name=request.POST['name'], docfile=request.FILES['docfile'])
             newdoc.save()
+            app.send_task("resize", [newdoc.docfile.path])
             return HttpResponseRedirect('/thanks/')
     else:
         picture_form = PictureForm()
